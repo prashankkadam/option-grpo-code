@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "option-grpo"
+version = "0.1.0"
+description = "Option-GRPO: hierarchical RL against AI slop in code generation for unseen SDKs"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+keywords = ["reinforcement-learning", "code-generation", "options", "grpo", "hierarchical-rl"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.2",
+    "transformers>=4.51",
+    "tokenizers>=0.19",
+    "accelerate>=0.30",
+    "numpy>=1.24",
+    "networkx>=3.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+embed = ["sentence-transformers>=2.6"]
+lora = ["peft>=0.11"]
+zero3 = ["deepspeed>=0.14"]
+api = ["openai>=1.30"]
+logging = ["wandb>=0.16"]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+all = [
+    "sentence-transformers>=2.6",
+    "peft>=0.11",
+    "deepspeed>=0.14",
+    "openai>=1.30",
+    "wandb>=0.16",
+]
+
+[project.scripts]
+option-grpo = "option_grpo.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+option_grpo = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "slow: end-to-end tests that train a tiny model on CPU",
+]
+
+[tool.ruff]
+line-length = 140
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B008", "B905"]

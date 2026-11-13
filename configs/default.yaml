@@ -1,0 +1,88 @@
+# Option-GRPO default configuration.
+# Values reproduce the hyperparameter table of the paper (Appendix B.2).  Every key can be
+# overridden with another YAML file (`-c`) or on the command line (`-o key.subkey=value`).
+
+sdk: daft
+seed: 0
+output_dir: runs/default
+artifacts_dir: artifacts
+
+model:
+  name_or_path: Qwen/Qwen3-32B-Base
+  dtype: bf16
+  autocast: none
+  gradient_checkpointing: true
+  stop_strings: ["# END SOLUTION"]
+
+grpo:
+  group_size: 16            # G
+  temperature: 0.8          # sampling temperature
+  clip_eps: 0.2             # PPO clip epsilon
+  kl_beta: 0.04             # KL penalty beta
+  option_loss_weight: 0.3   # lambda, option-level loss weight
+  prompts_per_step: 1
+  train_micro_batch: 4
+  rollout_chunk: 16
+  max_new_tokens: 384
+  reference: copy           # copy | adapter_off | none
+
+decode:
+  max_option_tokens: 96
+  initiation: last_value    # I_k = {s : type(last_value(s)) in T_in}
+  strict_chain: true
+
+reward:
+  quality_weight: 0.2             # lambda_q
+  consistency_weight: 0.1         # lambda_c
+  pattern_bonus: 0.1              # alpha_1
+  no_redundancy_bonus: 0.1        # alpha_2
+  minimal_api_bonus: 0.1          # alpha_3
+  reimplementation_penalty: 0.1   # alpha_4
+
+optim:
+  lr: 5.0e-5                # policy learning rate
+  option_lr: 5.0e-6         # option fine-tune learning rate (partially frozen blocks)
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  warmup_steps: 500
+  schedule: cosine
+
+curriculum:
+  steps: [5000, 10000, 15000]   # N_0, N_1, N_2
+  advance_threshold: 0.5        # rho_adv
+  max_composition_length: 4     # L_max
+  use_options: true
+  use_curriculum: true
+
+graph:
+  min_compat: 0.5
+  semantic_threshold: 0.7       # tau
+  embedder: sentence-transformers/all-MiniLM-L6-v2
+
+discovery:
+  max_path_length: 4            # L_max
+  cluster_threshold: 0.8        # tau_cluster
+
+certification:
+  samples_per_task: 10
+  temperature: 0.8
+  success_threshold: 0.7        # rho
+  frequency_threshold: 5        # nu
+
+benchmark:
+  level1_per_function: 2.0
+  level2_tasks: 33
+  test_fraction: 0.2
+  odl_max_options: 8            # m_max
+
+execution:
+  backend: subprocess           # use `docker` with execution.docker_image for isolation
+  timeout_s: 30
+  memory_mb: 2048
+  allow_network: false
+  workers: 8
+
+eval:
+  n_samples: 10
+  temperature: 0.8
+  ks: [1, 5, 10]

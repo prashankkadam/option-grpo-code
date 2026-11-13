@@ -1,0 +1,7 @@
+# Registry entry for the bundled example SDK (see README, "Quick start").
+tinyframe:
+  import_name: tinyframe
+  dist: tinyframe
+  category: DataFrame
+  display_name: tinyframe
+  source_root: tinyframe

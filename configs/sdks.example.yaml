@@ -1,0 +1,24 @@
+# Additional or overridden SDK definitions, loaded with `--sdk-registry <file>`.
+# Use this to pin the exact SDK versions of a benchmark run or to register a new SDK.
+#
+# <name>:
+#   import_name: top-level Python package (defaults to <name>)
+#   dist:        distribution name on the package index (defaults to import_name)
+#   version:     optional version pin used when building the sandbox image
+#   category:    domain label used in result tables
+#   display_name: name used in prompts of the memorisation probe
+#   source_root: path to the package directory when analysing a source checkout
+#   prelude:     import line(s) shown in prompts (defaults to `import <import_name>`)
+
+daft:
+  import_name: daft
+  dist: daft
+  category: DataFrame
+  display_name: Daft
+  # version: "x.y.z"
+
+my_sdk:
+  import_name: my_sdk
+  dist: my-sdk
+  category: General
+  source_root: ../path/to/my_sdk

@@ -1,0 +1,5 @@
+model:
+  name_or_path: Qwen/Qwen3-14B-Base
+  dtype: bf16
+grpo:
+  reference: none

@@ -1,0 +1,11 @@
+# Headline configuration: 32B dense base model, full fine-tuning with ZeRO-3 + bf16 on 8 GPUs.
+# Launch with `accelerate launch --config_file configs/accelerate/zero3.yaml`.
+# A frozen second copy of the model does not fit next to ZeRO-3 training, so the KL
+# reference is disabled here; enable LoRA with `grpo.reference=adapter_off` to keep the
+# KL term without a second copy.
+model:
+  name_or_path: Qwen/Qwen3-32B-Base
+  dtype: bf16
+grpo:
+  reference: none
+  rollout_chunk: 16

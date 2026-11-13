@@ -1,0 +1,13 @@
+# Low-rank adaptation of the 8B model; the KL reference is the base model with adapters off.
+model:
+  name_or_path: Qwen/Qwen3-8B-Base
+  dtype: bf16
+  lora:
+    enabled: true
+    r: 64
+    alpha: 128
+grpo:
+  reference: adapter_off
+curriculum:
+  freeze:
+    mode: none

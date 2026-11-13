@@ -1,0 +1,8 @@
+# Options without the curriculum: the candidate inventory is available from the start
+# and the policy trains on all levels at once.  Without curriculum stages there is no
+# certification or extraction, so options start from a positive logit bias.
+curriculum:
+  use_options: true
+  use_curriculum: false
+decode:
+  option_logit_bias: 2.0

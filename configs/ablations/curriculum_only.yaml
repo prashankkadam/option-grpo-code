@@ -1,0 +1,4 @@
+# Flat GRPO + curriculum: progressive difficulty without the option structure.
+curriculum:
+  use_options: false
+  use_curriculum: true

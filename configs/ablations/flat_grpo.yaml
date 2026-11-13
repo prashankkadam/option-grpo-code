@@ -1,0 +1,4 @@
+# Flat GRPO: token-level actions, a single phase over all tasks, layered execution reward.
+curriculum:
+  use_options: false
+  use_curriculum: false

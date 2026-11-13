@@ -1,0 +1,7 @@
+# 8B dense base model: fits on a single 80 GB GPU together with the frozen KL reference.
+model:
+  name_or_path: Qwen/Qwen3-8B-Base
+  dtype: bf16
+grpo:
+  reference: copy
+  train_micro_batch: 4

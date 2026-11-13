@@ -1,0 +1,33 @@
+# Small end-to-end run on the bundled example SDK (see README, "Quick start").
+sdk: tinyframe
+output_dir: runs/tinyframe-smoke
+model:
+  name_or_path: Qwen/Qwen3-0.6B-Base
+  dtype: fp32
+  gradient_checkpointing: false
+graph:
+  embedder: hashing
+grpo:
+  group_size: 4
+  rollout_chunk: 4
+  train_micro_batch: 2
+  max_new_tokens: 96
+  reference: none
+optim:
+  warmup_steps: 2
+curriculum:
+  steps: [4, 4, 4]
+  advance_window: 2
+certification:
+  samples_per_task: 4
+  frequency_threshold: 2
+  max_tasks: 12
+  extraction_steps: 10
+  extraction_batch: 4
+eval:
+  n_samples: 2
+  ks: [1, 2]
+  max_new_tokens: 96
+logging:
+  log_every: 1
+  save_every: 0
