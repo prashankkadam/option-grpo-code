@@ -4,7 +4,7 @@
 # reference is disabled here; enable LoRA with `grpo.reference=adapter_off` to keep the
 # KL term without a second copy.
 model:
-  name_or_path: Qwen/Qwen3-32B-Base
+  name_or_path: Qwen/Qwen3-32B
   dtype: bf16
 grpo:
   reference: none

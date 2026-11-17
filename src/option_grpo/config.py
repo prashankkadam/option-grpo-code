@@ -38,7 +38,7 @@ class LoraConfig:
 
 @dataclass
 class ModelConfig:
-    name_or_path: str = "Qwen/Qwen3-32B-Base"
+    name_or_path: str = "Qwen/Qwen3-32B"
     revision: str | None = None
     dtype: str = "bf16"  # bf16 | fp16 | fp32: precision of the loaded weights
     autocast: str = "none"  # none | bf16 | fp16: autocast precision of the forward passes

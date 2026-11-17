@@ -37,10 +37,12 @@ correspondence:
    property-based tests generated from type annotations, Algorithm 3), plus small
    bonuses for code quality and for agreement within the sampled group.
 
-The paper proves that code options induce a valid semi-Markov decision process, that
-the curriculum is monotone in value, that a shorter option description length implies
-shorter and more API-efficient programs, and that option-level credit assignment
-improves the gradient signal-to-noise ratio by a factor of `sqrt(T/K)`.
+The paper shows that code options induce a valid semi-Markov decision process and that
+the optimal value does not decrease as the curriculum adds levels. It gives conditional
+bounds under which a shorter option description length implies shorter and, in
+expectation, more API-efficient programs, and it analyses, under stated assumptions, how
+option-level credit assignment improves the gradient signal-to-noise ratio by a factor
+of `sqrt(T/K)`.
 
 ### Results reported in the paper
 
@@ -174,7 +176,7 @@ Notes on memory:
   (`grpo.train_micro_batch` is ignored) and gradient clipping is taken from the
   DeepSpeed configuration.
 
-The checkpoint name `Qwen/Qwen3-32B-Base` is the model stated in the paper. If it is not
+The checkpoint name `Qwen/Qwen3-32B` is the model stated in the paper. If it is not
 available to you, `configs/models/qwen3_14b.yaml` and `configs/models/qwen3_8b.yaml` use
 the smaller dense base models of the same family (the size sweep of the paper).
 
@@ -379,11 +381,12 @@ three-phase pipeline on `tinyframe` with a tiny language model.
 ## Citation
 
 ```bibtex
-@misc{optiongrpo,
-  title  = {Option-GRPO: Hierarchical RL Against AI Slop in Code Generation for Unseen SDKs},
-  author = {Anonymous},
-  note   = {Under review},
-  year   = {2026}
+@inproceedings{kadam2027optiongrpo,
+  title     = {Option-GRPO: Hierarchical RL Against AI Slop in Code Generation for Unseen SDKs},
+  author    = {Kadam, Prashank},
+  booktitle = {Findings of the Association for Computational Linguistics: EACL 2027},
+  year      = {2027},
+  note      = {To appear}
 }
 ```
 
